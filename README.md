@@ -7,8 +7,8 @@ The rules are:
  - Repeat a month/day every year, and map the dates to alternate days depenending on a sub-rule.  For example:
     - Move Saturday to the previous Friday, or move Sunday to the following Monday
     - Move Sunday to Monday
- - Get the nth day-of-week for a month.  Repeate every year.
- - Get the nth to last day-of-week for a month.  Repeate every year.
+ - Repeat the nth day-of-week for a month.  
+ - Repeat the nth to last day-of-week for a month. 
  - Get repeating Easter dates
  - Get repeating Good Friday dates
  
