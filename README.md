@@ -9,7 +9,7 @@ The rules are:
     - Move Sunday to Monday
  - Get the nth day-of-week for a month.  Repeate every year.
  - Get the nth to last day-of-week for a month.  Repeate every year.
- - Get repeating easter dates
+ - Get repeating Easter dates
  - Get repeating Good Friday dates
  
  See the test suits for example usage.
