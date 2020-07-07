@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import com.codepoetics.protonpack.StreamUtils;
 
 /**
  * Created by stephen on 7/16/15.
@@ -36,7 +37,7 @@ public class CalendarsTest {
     // Test a Christmas holiday calendar where weekends are rolled to the nearest weekday.
     @Test
     public void testCalendarForMonthDayWithOffset() {
-        String[] expected = { "2003-12-25", "2004-12-25", "2005-12-25", "2006-12-25" };
+        String[] expected = { "2003-12-25", "2004-12-24", "2005-12-26", "2006-12-25" };
         String start_date = "2003-12-25";
         Stream<LocalDate> actual = Calendars.getCalForMonthDayWithOffset(LocalDate.parse(start_date),
                 Month.DECEMBER, 25, CalendarUtil::nearestWeekDayOffset);
@@ -95,5 +96,19 @@ public class CalendarsTest {
         String start_date = "2015-01-01";
         Stream<LocalDate> actual = Calendars.getCalForGoodFriday(LocalDate.parse(start_date));
         testResults(expected, actual);
+    }
+    @Test
+    public void testTakeWhile() {
+	String[] expected_dates = { "2015-04-03", "2016-03-25", "2017-04-14", "2018-03-30" };
+        String start_date = "2015-01-01";
+        LocalDate end_date = LocalDate.parse("2018-12-01");
+        Stream<LocalDate> infiniteStream = Calendars.getCalForGoodFriday(LocalDate.parse(start_date));
+	
+	// Keep taking elements from the stream while the date is less than 2018-12-01
+	Stream<LocalDate> finiteStream = StreamUtils.takeWhile(infiniteStream, d -> d.isBefore(end_date));
+
+        List<String> expected = Arrays.asList(expected_dates);
+        List<String> actual = finiteStream.map(Object::toString).collect(Collectors.toList());
+        Assert.assertEquals(expected, actual);
     }
 }
